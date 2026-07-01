@@ -25,48 +25,49 @@ class ModelCreation():
 
 	def create_CNN(self, input_shape, num_classes):
 
-		# deep_cnn = Sequential()
-
-		# if len(input_shape) == 3:
-		# 	deep_cnn.add(InputLayer(input_shape=(input_shape[1], input_shape[2], 1)))
-		# else:
-		# 	deep_cnn.add(InputLayer(input_shape=(input_shape[1:])))
-
-		# deep_cnn.add(Conv2D(128, (5, 5), activation='relu', strides=(1, 1), padding='same'))
-		# deep_cnn.add(MaxPool2D(pool_size=(2, 2)))
-
-		# deep_cnn.add(Conv2D(64, (5, 5), activation='relu', strides=(2, 2), padding='same'))
-		# deep_cnn.add(MaxPool2D(pool_size=(2, 2)))
-		# deep_cnn.add(BatchNormalization())
-
-		# deep_cnn.add(Conv2D(32, (3, 3), activation='relu', strides=(2, 2), padding='same'))
-		# deep_cnn.add(MaxPool2D(pool_size=(2, 2)))
-		# deep_cnn.add(BatchNormalization())
-
-		# deep_cnn.add(Flatten())
-
-		# deep_cnn.add(Dense(100, activation='relu'))
-		# deep_cnn.add(Dense(100, activation='relu'))
-		# deep_cnn.add(Dropout(0.25))
-
-		# deep_cnn.add(Dense(num_classes, activation='softmax'))
-
-		# deep_cnn.compile(optimizer='sgd', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-
-		# return deep_cnn
-		
+	# --- REDE PARA IMAGENS (MNIST, CIFAR10, CIFAR100) ---
 		deep_cnn = Sequential()
-		deep_cnn.add(Conv1D(filters=32, kernel_size=3, activation='relu',kernel_initializer='he_uniform', input_shape=(input_shape[1], 1)))
-		deep_cnn.add(Conv1D(filters=32, kernel_size=3, activation='relu',kernel_initializer='he_uniform'))
-		deep_cnn.add(Dropout(0.6))
-		deep_cnn.add(MaxPooling1D(pool_size=2))
+
+			# O if/else inteligente que detecta se é preto/branco (MNIST) ou colorido (CIFAR)
+		if len(input_shape) == 3:
+			deep_cnn.add(InputLayer(input_shape=(input_shape[1], input_shape[2], 1)))
+		else:
+			deep_cnn.add(InputLayer(input_shape=(input_shape[1:])))
+
+		deep_cnn.add(Conv2D(128, (5, 5), activation='relu', strides=(1, 1), padding='same'))
+		deep_cnn.add(MaxPool2D(pool_size=(2, 2)))
+
+		deep_cnn.add(Conv2D(64, (5, 5), activation='relu', strides=(2, 2), padding='same'))
+		deep_cnn.add(MaxPool2D(pool_size=(2, 2)))
+		deep_cnn.add(BatchNormalization())
+
+		deep_cnn.add(Conv2D(32, (3, 3), activation='relu', strides=(2, 2), padding='same'))
+		deep_cnn.add(MaxPool2D(pool_size=(2, 2)))
+		deep_cnn.add(BatchNormalization())
+
 		deep_cnn.add(Flatten())
-		deep_cnn.add(Dense(50, activation='relu'))
+
+		deep_cnn.add(Dense(100, activation='relu'))
+		deep_cnn.add(Dense(100, activation='relu'))
+		deep_cnn.add(Dropout(0.25))
+
 		deep_cnn.add(Dense(num_classes, activation='softmax'))
-	
+
 		deep_cnn.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 		return deep_cnn
+        
+        # --- REDE PARA SENSORES (MotionSense, UCIHAR) ---
+        # deep_cnn = Sequential()
+        # deep_cnn.add(Conv1D(filters=32, kernel_size=3, activation='relu',kernel_initializer='he_uniform', input_shape=(input_shape[1], 1)))
+        # deep_cnn.add(Conv1D(filters=32, kernel_size=3, activation='relu',kernel_initializer='he_uniform'))
+        # deep_cnn.add(Dropout(0.6))
+        # deep_cnn.add(MaxPooling1D(pool_size=2))
+        # deep_cnn.add(Flatten())
+        # deep_cnn.add(Dense(50, activation='relu'))
+        # deep_cnn.add(Dense(num_classes, activation='softmax'))
+        # deep_cnn.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        # return deep_cnn
 
 
 	def create_LogisticRegression(self, input_shape, num_classes):

@@ -7,6 +7,6 @@ ADD client.py .
 ADD dataset_utils.py .
 ADD model_definition.py .
 
-RUN pip install numpy pandas tensorflow tensorflow-cpu flwr sklearn
+RUN pip install numpy pandas tensorflow-cpu flwr scikit-learn
 
 CMD ["python", "-u", "client.py"]

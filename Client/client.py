@@ -34,7 +34,7 @@ class FedClient(fl.client.NumPyClient):
 		self.n_clients    = n_clients
 		self.model_name   = model_name
 		self.local_epochs = epochs
-		self.non_iid      = False
+		self.non_iid      = True
 
 		self.model        = None
 		self.x_train      = None
@@ -73,7 +73,10 @@ class FedClient(fl.client.NumPyClient):
 	def load_data(self, dataset_name, n_clients):
 		return ManageDatasets(self.cid).select_dataset(dataset_name, n_clients, self.non_iid)
 
-	def create_model(self):
+	'''def create_model(self):
+		
+		
+		
 		input_shape = self.x_train.shape
 
 		if self.model_name == 'LR':
@@ -83,7 +86,41 @@ class FedClient(fl.client.NumPyClient):
 			return ModelCreation().create_DNN(input_shape, 6)
 
 		elif self.model_name == 'CNN':
-			return ModelCreation().create_CNN(input_shape, 6)
+			return ModelCreation().create_CNN(input_shape, 6)'''
+	
+	def create_model(self):
+
+			input_shape = self.x_train.shape
+
+
+			# Define o número correto de classes baseado no dataset
+
+			if self.dataset in ['MNIST', 'CIFAR10']:
+
+				num_classes = 10
+
+			elif self.dataset == 'CIFAR100':
+
+				num_classes = 100
+
+			else:
+
+				num_classes = 6 # Para UCIHAR e MotionSense
+
+
+			if self.model_name == 'LR':
+
+				return ModelCreation().create_LogisticRegression(input_shape, num_classes)
+
+
+			elif self.model_name == 'DNN':
+
+				return ModelCreation().create_DNN(input_shape, num_classes)
+
+
+			elif self.model_name == 'CNN':
+
+				return ModelCreation().create_CNN(input_shape, num_classes)
 		
 
 	def get_parameters(self, config):
@@ -106,6 +143,8 @@ class FedClient(fl.client.NumPyClient):
 			
 			#check if client has some battery available for training
 			if self.battery >= 0.05:
+				if self.battery:
+					self.model.set_weights(parameters)
 				self.model.set_weights(parameters)
 				has_battery        = True
 				selected           = 1
@@ -148,12 +187,14 @@ class FedClient(fl.client.NumPyClient):
 			return parameters, len(self.x_train), {'cid': self.cid, 'transmittion_prob' : self.transmittion_prob, 'cpu_cost': total_time}				
 
 
-
 	def evaluate(self, parameters, config):
-		
-		self.model.set_weights(parameters)
+        
+		# Agora está protegido de verdade. Se vier vazio, ele não tenta aplicar.
+		if parameters:
+			self.model.set_weights(parameters)
+
 		loss, accuracy     = self.model.evaluate(self.x_test, self.y_test, verbose=0)
-		size_of_parameters = sum(map(sys.getsizeof, parameters))
+		size_of_parameters = sum(map(sys.getsizeof, parameters)) if parameters else 0
 
 		filename = f"logs/{self.dataset}/{self.solution_name}/{self.model_name}/evaluate_client.csv"
 		os.makedirs(os.path.dirname(filename), exist_ok=True)
@@ -176,7 +217,7 @@ def main():
 	
 	client =  FedClient(
 					cid                    = int(os.environ['CLIENT_ID']), 
-					n_clients              = None, 
+					n_clients              =  int(os.environ['NUM_CLIENTS']), 
 					model_name             = os.environ['MODEL'], 
 					client_selection       = not os.environ['CLIENT_SELECTION'] == 'False', 
 					epochs                 = int(os.environ['LOCAL_EPOCHS']), 

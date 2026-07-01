@@ -2,10 +2,9 @@ import os
 from optparse import OptionParser
 import random
 
-
 def add_server_info(clients, rounds, algorithm,  solution, dataset, model, poc, decay):
     server_str = f"  server:\n\
-    image: 'allanmsouza/dockerbasedfl:server_fl'\n\
+    image: deev-server:latest\n\
     container_name: fl_server\n\
     environment:\n\
       - SERVER_IP=0.0.0.0:9999\n\
@@ -30,14 +29,14 @@ def add_server_info(clients, rounds, algorithm,  solution, dataset, model, poc, 
 
     return server_str
 
-
 def add_client_info(client, model, client_selection, local_epochs, solution, algorithm,
-					dataset, poc, decay, transmittion_threshold):
+          dataset, poc, decay, transmittion_threshold, total_clients):
     client_str = f"  client-{client}:\n\
-    image: 'allanmsouza/dockerbasedfl:client_fl'\n\
+    image: deev-client:latest\n\
     environment:\n\
       - SERVER_IP=fl_server:9999\n\
       - CLIENT_ID={client}\n\
+      - NUM_CLIENTS={total_clients}\n\
       - MODEL={model}\n\
       - CLIENT_SELECTION={client_selection}\n\
       - LOCAL_EPOCHS={local_epochs}\n\
@@ -49,6 +48,7 @@ def add_client_info(client, model, client_selection, local_epochs, solution, alg
       - TRANSMISSION_THRESHOLD={transmittion_threshold}\n\
     volumes:\n\
       - ./logs:/logs\n\
+      - ./Client/client.py:/client.py\n\
     networks:\n\
       - default\n\
     deploy:\n\
@@ -64,7 +64,6 @@ def add_client_info(client, model, client_selection, local_epochs, solution, alg
     return client_str
 
 def main():
-
     parser = OptionParser()
 
     parser.add_option("-c", "--clients",            dest="clients", default=0)
@@ -81,25 +80,22 @@ def main():
 
     (opt, args) = parser.parse_args()
 
-    with open(f'dockercompose-{opt.algorithm}-{opt.poc}-{opt.dataset}.yaml', 'a') as dockercompose_file:
+    with open(f'dockercompose-{opt.algorithm}-{opt.poc}-{opt.dataset}.yaml', 'w') as dockercompose_file:
         header = f"version: '3'\nservices:\n\n"
 
         dockercompose_file.write(header)
 
         server_str = add_server_info(opt.clients, opt.rounds, opt.algorithm, opt.solution, 
-	    				opt.dataset, opt.model, opt.poc, opt.decay)
+               opt.dataset, opt.model, opt.poc, opt.decay)
 
         dockercompose_file.write(server_str)
 
         for client in range(int(opt.clients)):
             client_str = add_client_info(client, opt.model, opt.client_selection, opt.local_epochs,
-										 opt.solution, opt.algorithm, opt.dataset, opt.poc, opt.decay,
-										 opt.transmittion_threshold)    
+                     opt.solution, opt.algorithm, opt.dataset, opt.poc, opt.decay,
+                     opt.transmittion_threshold, opt.clients)    
 
             dockercompose_file.write(client_str)
 
-
-
-
 if __name__ == '__main__':
-	main()
+    main()

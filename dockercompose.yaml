@@ -1,0 +1,327 @@
+version: '3'
+services:
+
+  server:
+    image: deev-server:latest
+    container_name: fl_server
+    environment:
+      - SERVER_IP=0.0.0.0:9999
+      - NUM_CLIENTS=10
+      - NUM_ROUNDS=140
+      - ALGORITHM=DEEV
+      - POC=0
+      - SOLUTION_NAME=None
+      - DATASET=CIFAR10
+      - MODEL=CNN
+      - DECAY=0.005
+    volumes:
+      - ./logs:/logs
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
+    
+
+  client-0:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=0
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.5808233073743445"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
+  client-1:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=1
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.2576858872248021"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
+  client-2:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=2
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.409676282215528"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
+  client-3:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=3
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.14395092898340098"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
+  client-4:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=4
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.8305433512573746"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
+  client-5:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=5
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.7157033360528955"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
+  client-6:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=6
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.19759821904232658"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
+  client-7:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=7
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.931201823967184"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
+  client-8:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=8
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.3587622017796067"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
+  client-9:
+    image: deev-client:latest
+    environment:
+      - SERVER_IP=fl_server:9999
+      - CLIENT_ID=9
+      - NUM_CLIENTS=10
+      - MODEL=CNN
+      - CLIENT_SELECTION=DEEV
+      - LOCAL_EPOCHS=1
+      - SOLUTION_NAME=None
+      - ALGORITHM=DEEV
+      - DATASET=CIFAR10
+      - POC=0
+      - DECAY=0.005
+      - TRANSMISSION_THRESHOLD=0.2
+    volumes:
+      - ./logs:/logs
+      - ./Client/client.py:/client.py
+    networks:
+      - default
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.9018447652340372"
+      placement:
+        constraints:
+          - node.role==worker
+          
+
