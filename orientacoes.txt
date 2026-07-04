@@ -1,0 +1,4 @@
+#inicilizar dockercompose
+python create_dockercompose.py --algorithm='POC' --client-selection='POC' --decay=0.005 --dataset='CIFAR10' --model='DNN' --local-epochs=1 --rounds=140 --clients=10 --poc=0.2 
+#execução
+docker compose -f dockercompose.yaml --compatibility up  
