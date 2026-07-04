@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # 1. Carregar os dados (com as colunas corretas que descobrimos antes)
-df_deev = pd.read_csv(r'D:\Documentos\Estudos\Mestrado\Aprendizado Federado\_DEEV\DEEV\logs\MNIST\None-DEEV-0.005\DNN\server.csv', header=None, names=['timestamp', 'round', 'loss', 'accuracy', 'top5'])
+df_deev = pd.read_csv(r'D:\Documentos\Estudos\Mestrado\Aprendizado Federado\_DEEV\DEEV\logs\MNIST\None-POC-0.2\DNN\server.csv', header=None, names=['timestamp', 'round', 'loss', 'accuracy', 'top5'])
 
 # 2. ORDENAR AS RODADAS
 # Isso impede que a linha volte para trás no gráfico

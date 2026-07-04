@@ -8,11 +8,11 @@ services:
       - SERVER_IP=0.0.0.0:9999
       - NUM_CLIENTS=10
       - NUM_ROUNDS=140
-      - ALGORITHM=DEEV
-      - POC=0
+      - ALGORITHM=POC
+      - POC=0.2
       - SOLUTION_NAME=None
       - DATASET=CIFAR10
-      - MODEL=CNN
+      - MODEL=DNN
       - DECAY=0.005
     volumes:
       - ./logs:/logs
@@ -31,13 +31,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=0
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -49,7 +49,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.5808233073743445"
+          cpus: "0.5128163561434121"
       placement:
         constraints:
           - node.role==worker
@@ -61,13 +61,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=1
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -79,7 +79,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.2576858872248021"
+          cpus: "0.6219703523368323"
       placement:
         constraints:
           - node.role==worker
@@ -91,13 +91,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=2
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -109,7 +109,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.409676282215528"
+          cpus: "0.5677083320724886"
       placement:
         constraints:
           - node.role==worker
@@ -121,13 +121,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=3
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -139,7 +139,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.14395092898340098"
+          cpus: "0.33200398703286815"
       placement:
         constraints:
           - node.role==worker
@@ -151,13 +151,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=4
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -169,7 +169,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.8305433512573746"
+          cpus: "0.14467422710264"
       placement:
         constraints:
           - node.role==worker
@@ -181,13 +181,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=5
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -199,7 +199,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.7157033360528955"
+          cpus: "0.35553828342013594"
       placement:
         constraints:
           - node.role==worker
@@ -211,13 +211,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=6
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -229,7 +229,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.19759821904232658"
+          cpus: "0.833152097675453"
       placement:
         constraints:
           - node.role==worker
@@ -241,13 +241,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=7
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -259,7 +259,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.931201823967184"
+          cpus: "0.38626214793841407"
       placement:
         constraints:
           - node.role==worker
@@ -271,13 +271,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=8
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -289,7 +289,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.3587622017796067"
+          cpus: "0.37043433714532925"
       placement:
         constraints:
           - node.role==worker
@@ -301,13 +301,13 @@ services:
       - SERVER_IP=fl_server:9999
       - CLIENT_ID=9
       - NUM_CLIENTS=10
-      - MODEL=CNN
-      - CLIENT_SELECTION=DEEV
+      - MODEL=DNN
+      - CLIENT_SELECTION=POC
       - LOCAL_EPOCHS=1
       - SOLUTION_NAME=None
-      - ALGORITHM=DEEV
+      - ALGORITHM=POC
       - DATASET=CIFAR10
-      - POC=0
+      - POC=0.2
       - DECAY=0.005
       - TRANSMISSION_THRESHOLD=0.2
     volumes:
@@ -319,7 +319,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.9018447652340372"
+          cpus: "0.49394219721028976"
       placement:
         constraints:
           - node.role==worker
